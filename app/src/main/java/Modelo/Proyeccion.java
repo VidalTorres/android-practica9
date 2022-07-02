@@ -11,4 +11,5 @@ public interface Proyeccion {
     public Alumno getAlumno(String matricula);
     public ArrayList<Alumno> allAlumnos();
     public Alumno readAlumno(Cursor cursor);
+
 }

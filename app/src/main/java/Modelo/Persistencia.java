@@ -9,4 +9,5 @@ public interface Persistencia {
     public long insertAlumno(Alumno alumno);
     public long updateAlumno(Alumno alumno);
     public void deleteAlumnos(int id);
+
 }

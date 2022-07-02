@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class AlumnoDbHelper extends SQLiteOpenHelper {
+
     private static final String TEXT_TYPE = "TEXT";
     private static final String INTIGER_TYPE = "INTIGER";
     private static final String COMMA_SEP = " ,";

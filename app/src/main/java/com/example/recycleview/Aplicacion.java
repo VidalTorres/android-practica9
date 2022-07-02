@@ -6,6 +6,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class Aplicacion extends Application {
+    //Array list
     private ArrayList<Alumno> alumnos;
     private MiAdaptador adaptador;
 

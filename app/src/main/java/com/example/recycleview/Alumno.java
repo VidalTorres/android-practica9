@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Alumno{
+    //variables
     private int id;
     private String carrera;
     private String nombre;

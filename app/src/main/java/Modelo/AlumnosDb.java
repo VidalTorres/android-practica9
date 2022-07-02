@@ -63,6 +63,7 @@ public class AlumnosDb implements Persistencia, Proyeccion{
         values.put(DefineTabla.Alumnos.COLUMN_NAME_FOTO, alumno.getImg());
 
         this.openDataBase();
+
         long num = db.update(
                 DefineTabla.Alumnos.TABLE_NAME,
                 values,

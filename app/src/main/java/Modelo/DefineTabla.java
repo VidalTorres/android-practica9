@@ -14,6 +14,7 @@ public class DefineTabla {
         public static final String COLUMN_NAME_FOTO = "foto";
 
         public static String[] REGISTRO = new String[]{
+
               Alumnos.COLUMN_NAME_ID,
               Alumnos.COLUMN_NAME_MATRICULA,
               Alumnos.COLUMN_NAME_NOMBRE,
