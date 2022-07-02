@@ -1,14 +1,20 @@
 package com.example.recycleview;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Alumno {
+public class Alumno{
+    private int id;
     private String carrera;
     private String nombre;
     private int img;
     private String matricula;
 
     //constructores
+
+    public Alumno() {
+    }
+
     public Alumno(String carrera, String nombre, int img, String matricula) {
         this.carrera = carrera;
         this.nombre = nombre;
@@ -47,6 +53,14 @@ public class Alumno {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     // funciones
