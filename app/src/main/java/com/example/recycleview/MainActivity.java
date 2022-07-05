@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private FloatingActionButton fbtnAgregar;
+    private Aplicacion app;
+
+    private Alumno alumno;
+    private int posicion = -1;
 
     private Button btnCerrar;
 
@@ -26,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnCerrar = (Button) findViewById(R.id.btnCerrar);
+        //btnCerrar = (Button) findViewById(R.id.btnCerrar);
         fbtnAgregar = (FloatingActionButton) findViewById(R.id.agregar);
 
         Aplicacion app = (Aplicacion) getApplication();
@@ -36,41 +41,41 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        app.getAdaptador().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int posicion = recyclerView.getChildAdapterPosition(v);
-                String dato = app.getAlumnos().get(posicion).getNombre();
-                Toast.makeText(MainActivity.this, "Se hizo click en " +dato, Toast.LENGTH_SHORT).show();
-            }
-        });
-        
         fbtnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Nuevo", Toast.LENGTH_SHORT).show();
+                alumno = null;
+                Intent intent = new Intent(MainActivity.this, AlumnoAlta.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("alumno", alumno);
+                intent.putExtras(bundle);
+
+                startActivityForResult(intent, 0);
             }
         });
 
-        btnCerrar.setOnClickListener(new View.OnClickListener() {
+        app.getAdaptador().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder confirmar = new AlertDialog.Builder(MainActivity.this);
-                confirmar.setTitle("¿Cerrar Aplicación?");
-                confirmar.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                confirmar.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                posicion = recyclerView.getChildAdapterPosition(v);
+                alumno = app.getAlumnos().get(posicion);
 
-                    }
-                });
-                confirmar.show();
+                Intent intent = new Intent(MainActivity.this, AlumnoAlta.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("alumno", alumno);
+                intent.putExtra("posicion", posicion);
+                intent.putExtras(bundle);
+
+                startActivityForResult(intent, 1);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        recyclerView.getAdapter().notifyDataSetChanged();
+        posicion = -1;
     }
 }
